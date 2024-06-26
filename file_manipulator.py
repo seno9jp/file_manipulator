@@ -38,14 +38,14 @@ def duplicate_contents(filename, n):
             f.write(contents)
 
 def replace_string(filename, needle, newstring):
-    get_input_path_and_filename(filename)
-    pass # TODO
+    contents = readfile(filename)
+    contents = contents.replace(needle, newstring)
+    print(contents)
+    writefile(filename, contents)
 
 def main():
     
     processing_input = sys.argv[1]
-    # args2 = sys.argv[2]
-    # args3 = sys.argv[3]
     
     if (processing_input == 'reverse'):
         filename = sys.argv[2]
@@ -59,10 +59,10 @@ def main():
         n = sys.argv[3]
         duplicate_contents(filename, n)
     elif (processing_input == 'replace-string'):
-        args2 = sys.argv[2]
-        args3 = sys.argv[3]
-        args4 = sys.argv[4]
-        replace_string(args2, args3, args4)
+        filename = sys.argv[2]
+        needle = sys.argv[3]
+        newstring = sys.argv[4]
+        replace_string(filename, needle, newstring)
     return 0
 
 if __name__ == '__main__':

@@ -4,12 +4,15 @@ import shutil
 from file_manipulator import *
 
 # テスト用のファイルを作成
-TEST_FILENAME = "testfile.txt"
-TEST_CONTENTS = "Hello, World!"
-REVERSED_CONTENTS = "!dlroW ,olleH"
-COPY_FILENAME = "copy_of_testfile.txt"
+TEST_FILENAME = 'testfile.txt'
+TEST_CONTENTS = 'Hello, World!'
+REVERSED_CONTENTS = '!dlroW ,olleH'
+COPY_FILENAME = 'copy_of_testfile.txt'
 TEST_DIR = 'test_files'
-DUPLICATE_FILENAME = "sample"
+DUPLICATE_FILENAME = 'sample'
+NEEDLE = 'Hello'
+NEWSTRING = 'Good morning'
+REPLACE_CONTENTS = 'Good morning, World!'
 
 @pytest.fixture
 def setup_and_teardown():
@@ -50,3 +53,10 @@ def test_duplicate_contents(setup_and_teardown):
         with open(copy_path, 'r') as f:
             contents = f.read()
             assert contents == TEST_CONTENTS, f"Error: The contents of {copy_path} do not match the original file."
+            
+def test_replace_string_contents(setup_and_teardown):
+    replace_string(TEST_FILENAME, NEEDLE, NEWSTRING)
+    with open(TEST_FILENAME) as f:
+        contents = f.read()
+        assert contents == REPLACE_CONTENTS, f"Error: The contents of {REPLACE_CONTENTS} do not match the replaced text."
+    
